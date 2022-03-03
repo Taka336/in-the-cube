@@ -34,17 +34,17 @@ export default class Player {
     }
   }
   moveInput(direction) {
-    if (this.canGo(direction)) {
+    if (this.canMove(direction)) {
       this.move(direction);
     } else {
-      if (this.canGo("up")) {
+      if (this.canMove("up")) {
         this.move("up");
-        if (this.canGo(direction)) {
+        if (this.canMove(direction)) {
           this.move(direction);
         }
       }
     }
-    while (this.canGo("down")) {
+    while (this.canMove("down")) {
       this.move("down");
     }
   }
@@ -54,7 +54,7 @@ export default class Player {
     const z = this.mesh.position.z / this.movingDistance;
     return [x, y, z];
   }
-  canGo(direction) {
+  canMove(direction) {
     let [x, y, z] = this.getPositionIndex();
     switch (direction) {
       case "forward":

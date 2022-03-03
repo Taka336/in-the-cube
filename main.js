@@ -23,7 +23,7 @@ const divisions = 10;
 const gridHelper = new THREE.GridHelper(size, divisions);
 scene.add(gridHelper);
 
-const controls = new OrbitControls(camera, renderer.domElement);
+// const controls = new OrbitControls(camera, renderer.domElement);
 
 camera.position.x = 0.5;
 camera.position.y = 1.5;

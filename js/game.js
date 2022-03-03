@@ -1,5 +1,6 @@
 import Stage from "./stage";
 import Player from "./player";
+import LocationMap from "./locationMap";
 import InputHandler from "./input";
 import { LEVEL1 } from "./levels";
 
@@ -14,7 +15,12 @@ export default class Game {
       this.stage.unitLength,
       this.level
     );
-    this.meshes = [...this.stage.meshes, this.player.mesh];
+    this.locationMap = new LocationMap();
+    this.meshes = [
+      ...this.stage.meshes,
+      this.player.mesh,
+      ...this.locationMap.meshes,
+    ];
 
     new InputHandler(this.player);
   }
