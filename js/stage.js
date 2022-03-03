@@ -38,7 +38,7 @@ export default class Stage {
     const geometry = new THREE.BoxGeometry(...this.lengthList);
     const material = new THREE.MeshNormalMaterial({
       transparent: true,
-      opacity: 0.3,
+      opacity: 0.4,
     });
     const container = new THREE.Mesh(geometry, material);
     container.position.x = (this.length - this.unitLength) / 2;

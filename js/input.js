@@ -3,16 +3,16 @@ export default class InputHandler {
     document.addEventListener("keydown", (event) => {
       switch (event.key) {
         case "ArrowUp":
-          player.move("forward");
+          player.moveInput("forward");
           break;
         case "ArrowDown":
-          player.move("backward");
+          player.moveInput("backward");
           break;
         case "ArrowRight":
-          player.move("right");
+          player.moveInput("right");
           break;
         case "ArrowLeft":
-          player.move("left");
+          player.moveInput("left");
           break;
       }
     });

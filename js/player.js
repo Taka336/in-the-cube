@@ -12,21 +12,40 @@ export default class Player {
     this.level = level;
   }
   move(direction) {
+    switch (direction) {
+      case "forward":
+        this.mesh.position.z -= this.movingDistance;
+        break;
+      case "backward":
+        this.mesh.position.z += this.movingDistance;
+        break;
+      case "right":
+        this.mesh.position.x += this.movingDistance;
+        break;
+      case "left":
+        this.mesh.position.x -= this.movingDistance;
+        break;
+      case "up":
+        this.mesh.position.y += this.movingDistance;
+        break;
+      case "down":
+        this.mesh.position.y -= this.movingDistance;
+        break;
+    }
+  }
+  moveInput(direction) {
     if (this.canGo(direction)) {
-      switch (direction) {
-        case "forward":
-          this.mesh.position.z -= this.movingDistance;
-          break;
-        case "backward":
-          this.mesh.position.z += this.movingDistance;
-          break;
-        case "right":
-          this.mesh.position.x += this.movingDistance;
-          break;
-        case "left":
-          this.mesh.position.x -= this.movingDistance;
-          break;
+      this.move(direction);
+    } else {
+      if (this.canGo("up")) {
+        this.move("up");
+        if (this.canGo(direction)) {
+          this.move(direction);
+        }
       }
+    }
+    while (this.canGo("down")) {
+      this.move("down");
     }
   }
   getPositionIndex() {
@@ -53,8 +72,15 @@ export default class Player {
       case "up":
         y += 1;
         break;
+      case "down":
+        y -= 1;
+        break;
     }
-    if (this.level[y][z][x] === 0) return true;
-    else return false;
+    try {
+      if (this.level[y][z][x] === 0) return true;
+      else return false;
+    } catch {
+      return false;
+    }
   }
 }
