@@ -1,18 +1,14 @@
 export default class MoveHandler {
-  constructor(level, player, xyLocationMap, xzLocationMap) {
+  constructor(level, player, locationDisplay) {
     this.level = level;
     this.player = player;
-    this.xyLocationMap = xyLocationMap;
-    this.xzLocationMap = xzLocationMap;
-    this.updateXYLocationMap();
-    this.updateXZLocationMap();
+    this.locationDisplay = locationDisplay;
+    this.locationDisplay.update(this.player.getPositionIndex());
   }
   move(direction) {
-    this.updateXYLocationMap();
-    this.updateXZLocationMap();
+    this.locationDisplay.update(this.player.getPositionIndex());
     this.player.move(direction);
-    this.updateXYLocationMap();
-    this.updateXZLocationMap();
+    this.locationDisplay.update(this.player.getPositionIndex());
   }
   input(direction) {
     if (this.playerCanMove(direction)) {
@@ -57,16 +53,5 @@ export default class MoveHandler {
     } catch {
       return false;
     }
-  }
-  updateXYLocationMap() {
-    let [x, y, z] = this.player.getPositionIndex();
-    z = this.level.length - 1 - z;
-    const cube = this.xyLocationMap.getCube(z, x);
-    cube.material.visible = !cube.material.visible;
-  }
-  updateXZLocationMap() {
-    let [x, y, z] = this.player.getPositionIndex();
-    const cube = this.xzLocationMap.getCube(y, x);
-    cube.material.visible = !cube.material.visible;
   }
 }

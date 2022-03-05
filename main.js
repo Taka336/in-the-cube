@@ -8,7 +8,7 @@ const camera = new THREE.PerspectiveCamera(
   100,
   window.innerWidth / window.innerHeight,
   0.1,
-  1000
+  30
 );
 const renderer = new THREE.WebGLRenderer();
 renderer.setSize(window.innerWidth, window.innerHeight);
@@ -17,12 +17,12 @@ document.body.appendChild(renderer.domElement);
 const game = new Game();
 scene.add(...game.meshes);
 
-const gridHelper = new THREE.GridHelper(10, 10);
+const gridHelper = new THREE.GridHelper(50, 25);
 scene.add(gridHelper);
 
 // new OrbitControls(camera, renderer.domElement);
 
-camera.position.x = game.stage.length / 2;
+camera.position.x = (game.stage.length - game.stage.unitLength) / 2;
 camera.position.y = game.stage.length;
 camera.position.z = game.stage.size;
 
