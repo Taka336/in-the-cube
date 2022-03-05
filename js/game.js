@@ -2,6 +2,7 @@ import Stage from "./stage";
 import Player from "./player";
 import LocationMap from "./locationMap";
 import InputHandler from "./input";
+import MoveHandler from "./moveHandler";
 import { LEVEL1 } from "./levels";
 
 export default class Game {
@@ -12,16 +13,24 @@ export default class Game {
       this.stage.startPostion.x,
       this.stage.startPostion.y,
       this.stage.startPostion.z,
-      this.stage.unitLength,
-      this.level
+      this.stage.unitLength
     );
-    this.locationMap = new LocationMap();
+    this.xyLocationMap = new LocationMap(0, 3, 0, this.level.length);
+    this.xzLocationMap = new LocationMap(1, 3, 0, this.level.length);
     this.meshes = [
       ...this.stage.meshes,
       this.player.mesh,
-      ...this.locationMap.meshes,
+      ...this.xyLocationMap.meshes,
+      ...this.xzLocationMap.meshes,
     ];
 
-    new InputHandler(this.player);
+    this.moveHandler = new MoveHandler(
+      this.level,
+      this.player,
+      this.xyLocationMap,
+      this.xzLocationMap
+    );
+
+    new InputHandler(this.moveHandler);
   }
 }

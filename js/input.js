@@ -1,18 +1,18 @@
 export default class InputHandler {
-  constructor(player) {
+  constructor(moveHandler) {
     document.addEventListener("keydown", (event) => {
       switch (event.key) {
         case "ArrowUp":
-          player.moveInput("forward");
+          moveHandler.input("forward");
           break;
         case "ArrowDown":
-          player.moveInput("backward");
+          moveHandler.input("backward");
           break;
         case "ArrowRight":
-          player.moveInput("right");
+          moveHandler.input("right");
           break;
         case "ArrowLeft":
-          player.moveInput("left");
+          moveHandler.input("left");
           break;
       }
     });

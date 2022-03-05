@@ -5,25 +5,28 @@ export default class Stage {
     this.level = level;
     this.size = level.length;
     this.unitLength = 0.5;
-    this.unitLengthList = Array(3).fill(this.unitLength);
     this.length = this.unitLength * this.size;
-    this.lengthList = Array(3).fill(this.length);
     this.meshes = [];
     this.startPostion = {
       x: (this.length - this.unitLength) / 2,
       y: 0,
       z: this.length - this.unitLength,
     };
-    this.set_cubes();
-    this.set_container();
+    this.setCubes();
+    this.setContainer();
   }
-  set_cubes() {
+  setCubes() {
+    const geometry = new THREE.BoxGeometry(
+      this.unitLength,
+      this.unitLength,
+      this.unitLength
+    );
+    const material = new THREE.MeshNormalMaterial();
+
     for (let i = 0; i < this.level.length; i++) {
       for (let j = 0; j < this.level[i].length; j++) {
         for (let k = 0; k < this.level[i][j].length; k++) {
           if (this.level[i][j][k] === 1) {
-            const geometry = new THREE.BoxGeometry(...this.unitLengthList);
-            const material = new THREE.MeshNormalMaterial();
             const cube = new THREE.Mesh(geometry, material);
             cube.position.x = this.unitLength * k;
             cube.position.y = this.unitLength * i;
@@ -34,8 +37,12 @@ export default class Stage {
       }
     }
   }
-  set_container() {
-    const geometry = new THREE.BoxGeometry(...this.lengthList);
+  setContainer() {
+    const geometry = new THREE.BoxGeometry(
+      this.length,
+      this.length,
+      this.length
+    );
     const material = new THREE.MeshNormalMaterial({
       transparent: true,
       opacity: 0.4,
