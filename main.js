@@ -17,17 +17,14 @@ document.body.appendChild(renderer.domElement);
 const game = new Game();
 scene.add(...game.meshes);
 
-const size = 10;
-const divisions = 10;
-
-const gridHelper = new THREE.GridHelper(size, divisions);
+const gridHelper = new THREE.GridHelper(10, 10);
 scene.add(gridHelper);
 
-// const controls = new OrbitControls(camera, renderer.domElement);
+// new OrbitControls(camera, renderer.domElement);
 
-camera.position.x = 0.5;
-camera.position.y = 1.5;
-camera.position.z = 3;
+camera.position.x = game.stage.length / 2;
+camera.position.y = game.stage.length;
+camera.position.z = game.stage.size;
 
 function animate() {
   requestAnimationFrame(animate);
