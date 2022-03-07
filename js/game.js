@@ -1,14 +1,25 @@
 import Stage from "./stage";
 import Player from "./player";
 import LocationDisplay from "./locationDisplay";
-import Text from "./text";
 import InputHandler from "./input";
 import MoveHandler from "./moveHandler";
-import { LEVEL1, LEVEL2 } from "./levels";
+import { LEVELS } from "./levels";
+
+const STATE = {
+  MENU: 0,
+  PLAY: 1,
+};
 
 export default class Game {
-  constructor() {
-    this.level = LEVEL2;
+  constructor(scene, camera) {
+    this.scene = scene;
+    this.camera = camera;
+    this.state = STATE.MENU;
+
+    new InputHandler(this);
+  }
+  buildStage() {
+    this.level = LEVELS["LEVEL1"];
     this.stage = new Stage(this.level);
     this.player = new Player(
       this.stage.startPostion.x,
@@ -23,19 +34,11 @@ export default class Game {
       size: this.level.length,
       unitLength: this.stage.unitLength,
     });
-    this.text = new Text({
-      x: 0,
-      y: 5,
-      z: this.stage.unitLength * (this.level.length - 1),
-      size: this.level.length,
-      unitLength: this.stage.unitLength / 4,
-    });
 
     this.meshes = [
       this.player.mesh,
       ...this.stage.meshes,
       ...this.locationDisplay.meshes,
-      ...this.text.meshes,
     ];
 
     this.moveHandler = new MoveHandler(
@@ -44,6 +47,10 @@ export default class Game {
       this.locationDisplay
     );
 
-    new InputHandler(this.moveHandler);
+    this.camera.position.x = (this.stage.length - this.stage.unitLength) / 2;
+    this.camera.position.y = this.stage.length;
+    this.camera.position.z = this.stage.size;
+
+    this.scene.add(...this.meshes);
   }
 }

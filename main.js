@@ -1,34 +1,21 @@
-import "./style.css";
 import * as THREE from "three";
-import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
+import "./style.css";
 import Game from "./js/game";
 
+const W = window.innerWidth;
+const H = window.innerHeight;
+
 const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera(
-  100,
-  window.innerWidth / window.innerHeight,
-  0.1,
-  30
-);
+const camera = new THREE.PerspectiveCamera(100, W / H, 0.1, 30);
+
 const renderer = new THREE.WebGLRenderer();
-renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.setSize(W, H);
 document.body.appendChild(renderer.domElement);
 
-const game = new Game();
-scene.add(...game.meshes);
-
-const gridHelper = new THREE.GridHelper(50, 25);
-scene.add(gridHelper);
-
-// new OrbitControls(camera, renderer.domElement);
-
-camera.position.x = (game.stage.length - game.stage.unitLength) / 2;
-camera.position.y = game.stage.length;
-camera.position.z = game.stage.size;
+const game = new Game(scene, camera);
 
 function animate() {
   requestAnimationFrame(animate);
-  game.player.mesh.rotation.y += 0.01;
   renderer.render(scene, camera);
 }
 
