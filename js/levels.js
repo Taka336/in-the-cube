@@ -1,5 +1,5 @@
-export const LEVELS = {
-  LEVEL1: [
+export const LEVELS = [
+  [
     [
       [1, 1, 1],
       [1, 0, 0],
@@ -16,7 +16,7 @@ export const LEVELS = {
       [0, 0, 0],
     ],
   ],
-  LEVEL2: [
+  [
     [
       [0, 1, 0, 0, 0],
       [0, 0, 0, 1, 0],
@@ -53,4 +53,5 @@ export const LEVELS = {
       [1, 1, 0, 0, 0],
     ],
   ],
-};
+  [],
+];
