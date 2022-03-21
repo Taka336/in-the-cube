@@ -4,23 +4,31 @@ export default class InputHandler {
       switch (event.key) {
         case "ArrowUp":
           if (game.state === "menu") {
-            game.menu.hoge("up");
+            game.menu.move("forward");
           } else {
             game.moveHandler.input("forward");
           }
           break;
         case "ArrowDown":
           if (game.state === "menu") {
-            game.menu.hoge("down");
+            game.menu.move("backward");
           } else {
             game.moveHandler.input("backward");
           }
           break;
         case "ArrowRight":
-          game.moveHandler.input("right");
+          if (game.state === "menu") {
+            game.menu.move("right");
+          } else {
+            game.moveHandler.input("right");
+          }
           break;
         case "ArrowLeft":
-          game.moveHandler.input("left");
+          if (game.state === "menu") {
+            game.menu.move("left");
+          } else {
+            game.moveHandler.input("left");
+          }
           break;
         case "Enter":
           game.scene.clear();
@@ -29,16 +37,6 @@ export default class InputHandler {
         case "0":
           game.scene.clear();
           game.buildMenu();
-          break;
-        case "1":
-          game.scene.clear();
-          game.levelIdx = 0;
-          game.buildStage();
-          break;
-        case "2":
-          game.scene.clear();
-          game.levelIdx = 1;
-          game.buildStage();
           break;
         default:
           console.log(event.key);

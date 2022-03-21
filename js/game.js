@@ -20,7 +20,8 @@ export default class Game {
   }
   buildMenu() {
     this.state = "menu";
-    this.menu = new Menu(this.levels);
+    this.levelIdx = 0;
+    this.menu = new Menu(this);
     this.scene.add(...this.menu.meshes);
     this.camera.position.x = 0;
     this.camera.position.y = 0;

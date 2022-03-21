@@ -1,10 +1,12 @@
 import * as THREE from "three";
 
 export default class Menu {
-  constructor(levels) {
-    this.levels = levels;
+  constructor(game) {
+    this.game = game;
+    this.levels = game.levels;
     this.meshes = [];
     this.unitLength = 0.8;
+    this.cone = null;
     this.setCubes();
     this.setCone();
   }
@@ -35,5 +37,22 @@ export default class Menu {
     const cone = new THREE.Mesh(geometory, material);
     cone.position.x = -2 * this.unitLength;
     this.meshes.push(cone);
+    this.cone = cone;
+  }
+  move(direction) {
+    switch (direction) {
+      case "right":
+        if (this.game.levelIdx < this.levels.length - 1) {
+          this.cone.position.x += this.unitLength * 2;
+          this.game.levelIdx += 1;
+        }
+        break;
+      case "left":
+        if (this.game.levelIdx > 0) {
+          this.cone.position.x -= this.unitLength * 2;
+          this.game.levelIdx -= 1;
+        }
+        break;
+    }
   }
 }
