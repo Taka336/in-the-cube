@@ -1,9 +1,9 @@
 import Stage from "./stage";
 import Player from "./player";
 import Menu from "./menu";
-import LocationDisplay from "./locationDisplay";
+import navigationDisplay from "./navigation";
 import InputHandler from "./input";
-import MoveHandler from "./moveHandler";
+import MoveHandler from "./move";
 import { levels } from "./levels";
 import { state } from "./state";
 
@@ -37,7 +37,7 @@ export default class Game {
       this.stage.startPostion.z,
       this.stage.unitLength
     );
-    this.locationDisplay = new LocationDisplay({
+    this.navigationDisplay = new navigationDisplay({
       x: 0,
       y: this.stage.unitLength * (this.level.length + 1),
       z: this.stage.unitLength * (this.level.length - 1),
@@ -48,7 +48,7 @@ export default class Game {
     this.moveHandler = new MoveHandler(
       this.level,
       this.player,
-      this.locationDisplay
+      this.navigationDisplay
     );
 
     this.camera.position.x = (this.stage.length - this.stage.unitLength) / 2;
@@ -58,7 +58,7 @@ export default class Game {
     this.scene.add(
       this.player.mesh,
       ...this.stage.meshes,
-      ...this.locationDisplay.meshes
+      ...this.navigationDisplay.meshes
     );
   }
 }

@@ -1,14 +1,14 @@
 export default class MoveHandler {
-  constructor(level, player, locationDisplay) {
+  constructor(level, player, navigationDisplay) {
     this.level = level;
     this.player = player;
-    this.locationDisplay = locationDisplay;
-    this.locationDisplay.update(this.player.getPositionIndex());
+    this.navigationDisplay = navigationDisplay;
+    this.navigationDisplay.update(this.player.getPositionIndex());
   }
   move(direction) {
-    this.locationDisplay.update(this.player.getPositionIndex());
+    this.navigationDisplay.update(this.player.getPositionIndex());
     this.player.move(direction);
-    this.locationDisplay.update(this.player.getPositionIndex());
+    this.navigationDisplay.update(this.player.getPositionIndex());
   }
   input(direction) {
     if (this.playerCanMove(direction)) {

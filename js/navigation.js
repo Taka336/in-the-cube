@@ -1,6 +1,6 @@
 import * as THREE from "three";
 
-export default class LocationDisplay {
+export default class navigationDisplay {
   constructor({ x, y, z, size, unitLength }) {
     this.position = {
       x: x,
@@ -33,8 +33,8 @@ export default class LocationDisplay {
     const index = row * this.size + col;
     return this.meshes[index];
   }
-  update(playerLocationIndex) {
-    let [x, y, z] = playerLocationIndex;
+  update(playernavigationIndex) {
+    let [x, y, z] = playernavigationIndex;
     z = this.size - 1 - z;
     const xCube = this.getCube(0, x);
     const yCube = this.getCube(1, z);
