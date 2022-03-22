@@ -19,6 +19,7 @@ export default class Game {
     new InputHandler(this);
   }
   buildMenu() {
+    this.scene.clear();
     this.state = "menu";
     this.levelIdx = 0;
     this.menu = new Menu(this);
@@ -28,6 +29,7 @@ export default class Game {
     this.camera.position.z = this.levels.length + 1;
   }
   buildStage() {
+    this.scene.clear();
     this.state = "playing";
     this.level = this.levels[this.levelIdx];
     this.stage = new Stage(this.level);
