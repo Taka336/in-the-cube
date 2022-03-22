@@ -1,8 +1,10 @@
+import { state } from "./state";
+
 export default class InputHandler {
   constructor(game) {
     this.game = game;
     document.addEventListener("keydown", (event) => {
-      switch (this.game.state) {
+      switch (state.get()) {
         case "playing":
           this.playingState(event.key);
           break;

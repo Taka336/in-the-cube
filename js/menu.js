@@ -1,9 +1,9 @@
 import * as THREE from "three";
+import { levels } from "./levels";
 
 export default class Menu {
   constructor(game) {
     this.game = game;
-    this.levels = game.levels;
     this.meshes = [];
     this.unitLength = 0.8;
     this.cone = null;
@@ -16,7 +16,7 @@ export default class Menu {
       this.unitLength,
       this.unitLength
     );
-    for (let i = 0; i < this.levels.length; i++) {
+    for (let i = 0; i < levels.getLength(); i++) {
       const material = new THREE.MeshNormalMaterial({
         transparent: true,
         opacity: 0.2,
@@ -42,15 +42,15 @@ export default class Menu {
   move(direction) {
     switch (direction) {
       case "right":
-        if (this.game.levelIdx < this.levels.length - 1) {
+        if (levels.getIndex() < levels.getLength() - 1) {
           this.cone.position.x += this.unitLength * 2;
-          this.game.levelIdx += 1;
+          levels.incrementIndex();
         }
         break;
       case "left":
-        if (this.game.levelIdx > 0) {
+        if (levels.getIndex() > 0) {
           this.cone.position.x -= this.unitLength * 2;
-          this.game.levelIdx -= 1;
+          levels.decrementIndex();
         }
         break;
     }

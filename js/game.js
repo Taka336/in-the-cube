@@ -4,34 +4,32 @@ import Menu from "./menu";
 import LocationDisplay from "./locationDisplay";
 import InputHandler from "./input";
 import MoveHandler from "./moveHandler";
-import { LEVELS } from "./levels";
+import { levels } from "./levels";
+import { state } from "./state";
 
 export default class Game {
   constructor(scene, camera) {
     this.scene = scene;
     this.camera = camera;
-    this.state = null;
-    this.levels = LEVELS;
-    this.levelIdx = 0;
 
     this.buildMenu();
 
     new InputHandler(this);
   }
   buildMenu() {
+    state.changeTo("menu");
+    levels.setIndexToZero();
     this.scene.clear();
-    this.state = "menu";
-    this.levelIdx = 0;
     this.menu = new Menu(this);
     this.scene.add(...this.menu.meshes);
     this.camera.position.x = 0;
     this.camera.position.y = 0;
-    this.camera.position.z = this.levels.length + 1;
+    this.camera.position.z = levels.getLength() + 1;
   }
   buildStage() {
+    state.changeTo("playing");
     this.scene.clear();
-    this.state = "playing";
-    this.level = this.levels[this.levelIdx];
+    this.level = levels.getLevel();
     this.stage = new Stage(this.level);
     this.player = new Player(
       this.stage.startPostion.x,
